@@ -331,3 +331,63 @@ a{ color:inherit; }
   opacity:1;
   transform: translateY(0);
 }
+/* =========================
+   Chapter cards (consistencia visual)
+========================= */
+.chapter-card{
+  padding-top: clamp(18px, 3.6vw, 36px);
+}
+
+.chapter-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom: 14px;
+}
+
+.chapter-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: rgba(215,179,124,.14);
+  border: 1px solid rgba(215,179,124,.25);
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+
+.chapter-meta{
+  color: rgba(31,31,31,.70);
+  font-size: .95rem;
+}
+
+.chapter-title{
+  font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  font-size: clamp(1.8rem, 4.2vw, 2.6rem);
+  margin: 0 0 14px;
+}
+
+.chapter-divider{
+  height:1px;
+  background: linear-gradient(90deg, transparent, rgba(233,222,207,.95), transparent);
+  margin: 18px 0;
+}
+
+.verse-strong{
+  background: radial-gradient(650px 200px at 20% 20%, rgba(215,179,124,.18), transparent 65%),
+              rgba(215,179,124,.10);
+  border: 1px solid rgba(215,179,124,.28);
+}
+
+/* Mejor lectura cuando el capítulo se ve "demasiado ancho" */
+@media (min-width: 980px){
+  .chapter-card{
+    padding-left: 54px;
+    padding-right: 54px;
+  }
+}
