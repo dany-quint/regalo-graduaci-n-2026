@@ -34,3 +34,27 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 50);
 });
+// Música ON/OFF
+const musicToggle = document.getElementById("musicToggle");
+const bgMusic = document.getElementById("bgMusic");
+
+if (musicToggle && bgMusic) {
+  bgMusic.volume = 0.22;
+
+  musicToggle.addEventListener("click", async () => {
+    try {
+      if (bgMusic.paused) {
+        await bgMusic.play();
+        musicToggle.textContent = "⏸ Pausar música";
+        musicToggle.setAttribute("aria-pressed", "true");
+      } else {
+        bgMusic.pause();
+        musicToggle.textContent = "🎶 Activar música";
+        musicToggle.setAttribute("aria-pressed", "false");
+      }
+    } catch (e) {
+      // Si el navegador bloquea por alguna razón
+      alert("Tu navegador bloqueó la reproducción. Intenta hacer clic otra vez.");
+    }
+  });
+}
