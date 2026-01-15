@@ -61,37 +61,59 @@
 
 
   <!-- 🌱 CAPÍTULO 1 -->
-<section id="capitulo-1" class="section chapter">
-  <div class="content fade-in">
+<section id="capitulo-1" class="section">
+  <div class="container">
+    <div class="card fade-in">
+      <h2 class="chapter-title">Capítulo 1 · El inicio</h2>
 
-    <h2>Capítulo 1 · El inicio</h2>
+      <p class="chapter-text">
+        <strong>Adelita</strong> empezó este camino con fe… y con valentía.
+        No era solo una carrera: era un proceso donde Dios iba escribiendo historia.
+      </p>
 
-    <p class="chapter-text">
-      Todo comenzó con una decisión sencilla,
-      pero valiente.
-    </p>
+      <p class="chapter-text">
+        Si hoy estás leyendo esto, es porque el Señor fue fiel.
+        Y lo seguirá siendo en lo que viene.
+      </p>
 
-    <p class="chapter-text">
-      <strong>Adela Justiniano Hilario</strong>,
-      hija amada de Dios,
-      decidió dar el primer paso
-      en un camino que no siempre sería fácil,
-      pero que nunca estaría vacío.
-    </p>
+      <div class="verse">
+        “Reconócelo en todos tus caminos, y Él enderezará tus sendas.”
+        <span>— Proverbios 3:6</span>
+      </div>
 
-    <p class="chapter-text">
-      Desde el primer día,
-      el Señor ya iba delante de ella.
-    </p>
+      <div class="deck" aria-label="Cartas con recuerdos y versículos">
+        <div class="cardlet" data-title="Ebenezer" data-body="Adelita, si algo grita este capítulo es esto: el Señor estuvo presente en cada ciclo, cada trasnochada, cada lágrima… y también en cada victoria. Hasta aquí, Él nos ayudó.">
+          <div class="badge"><span class="dot"></span> Carta 1</div>
+          <h4>“Hasta aquí…”</h4>
+          <p>Toca para abrir una carta especial.</p>
+        </div>
 
-    <blockquote class="verse">
-      “Reconócelo en todos tus caminos,
-      y Él enderezará tus sendas.”
-      <span>— Proverbios 3:6</span>
-    </blockquote>
+        <div class="cardlet" data-title="Identidad" data-body="Tu identidad no está en una nota, ni en una carrera, ni en un título. Está en Jesús. Y eso te hace libre: para aprender, crecer y avanzar sin miedo.">
+          <div class="badge"><span class="dot"></span> Carta 2</div>
+          <h4>“Eres de Cristo”</h4>
+          <p>Toca para recordar lo esencial.</p>
+        </div>
 
+        <div class="cardlet" data-title="Nueva etapa" data-body="Cinco años fueron solo el prólogo. Lo que viene es una historia nueva con Dios al frente. Y sí: habrá retos… pero también puertas abiertas, favor y propósito.">
+          <div class="badge"><span class="dot"></span> Carta 3</div>
+          <h4>“El inicio de algo nuevo”</h4>
+          <p>Toca para ver el mensaje final.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<!-- Modal para cartas -->
+<div id="modal" class="modal" aria-hidden="true">
+  <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-top">
+      <h3 id="modalTitle" class="modal-title">Carta</h3>
+      <button id="modalClose" class="modal-close" aria-label="Cerrar">✕</button>
+    </div>
+    <div id="modalBody" class="modal-body"></div>
+  </div>
+</div>
 
 
   <!-- 🌧 CAPÍTULO 2 -->
