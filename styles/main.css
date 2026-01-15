@@ -34,15 +34,42 @@ body {
    INTRO
 ========================= */
 .intro h1 {
-  font-size: 3rem;
-  margin-bottom: 12px;
+  font-size: 3.2rem; /* base */
+  margin-bottom: 16px;
 }
 
-.subtitle {
-  font-size: 1.1rem;
-  font-style: italic;
-  margin-bottom: 32px;
+/* 📱 Celulares */
+@media (max-width: 480px) {
+  .intro h1 {
+    font-size: 2.2rem;
+  }
 }
+
+/* 💻 Tablets y laptops */
+@media (min-width: 768px) {
+  .intro h1 {
+    font-size: 4rem;
+  }
+}
+
+/* 🖥️ Pantallas grandes */
+@media (min-width: 1200px) {
+  .intro h1 {
+    font-size: 4.8rem;
+  }
+}
+
+
+.subtitle {
+  font-size: 1.2rem;
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 1.4rem;
+  }
+}
+
 
 .intro-text {
   font-size: 1.2rem;
