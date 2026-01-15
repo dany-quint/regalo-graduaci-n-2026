@@ -34,27 +34,47 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 50);
 });
-// Música ON/OFF
+// Música ON/OFF (robusto)
 const musicToggle = document.getElementById("musicToggle");
 const bgMusic = document.getElementById("bgMusic");
+const musicStatus = document.getElementById("musicStatus");
 
 if (musicToggle && bgMusic) {
   bgMusic.volume = 0.22;
 
-  musicToggle.addEventListener("click", async () => {
-    try {
-      if (bgMusic.paused) {
-        await bgMusic.play();
-        musicToggle.textContent = "⏸ Pausar música";
-        musicToggle.setAttribute("aria-pressed", "true");
-      } else {
-        bgMusic.pause();
-        musicToggle.textContent = "🎶 Activar música";
-        musicToggle.setAttribute("aria-pressed", "false");
-      }
-    } catch (e) {
-      // Si el navegador bloquea por alguna razón
-      alert("Tu navegador bloqueó la reproducción. Intenta hacer clic otra vez.");
+  const setStatus = (msg) => {
+    if (musicStatus) musicStatus.textContent = msg;
+  };
+
+  musicToggle.addEventListener("click", () => {
+    // Asegura que el audio esté listo
+    bgMusic.load();
+
+    // Intento de reproducir (sin async/await para evitar bloqueos raros)
+    const playPromise = bgMusic.play();
+
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          // Si estaba pausado y ahora suena
+          if (!bgMusic.paused) {
+            musicToggle.textContent = "⏸ Pausar música";
+            musicToggle.setAttribute("aria-pressed", "true");
+            setStatus("Música activada ✨");
+          }
+        })
+        .catch(() => {
+          // Si no se pudo reproducir
+          setStatus("Tu navegador bloqueó la música. Haz clic otra vez o recarga la página.");
+        });
+    }
+
+    // Si ya estaba sonando, pausar
+    if (!bgMusic.paused) {
+      bgMusic.pause();
+      musicToggle.textContent = "🎶 Activar música";
+      musicToggle.setAttribute("aria-pressed", "false");
+      setStatus("Música en pausa.");
     }
   });
 }
