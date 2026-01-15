@@ -48,7 +48,6 @@ if (musicToggle && bgMusic) {
   };
 
   const tryPlay = () => {
-    // fuerza carga
     bgMusic.load();
 
     bgMusic
@@ -68,16 +67,6 @@ if (musicToggle && bgMusic) {
     if (bgMusic.paused) {
       tryPlay();
     } else {
-      bgMusic.pause();
-      musicToggle.textContent = "🎶 Activar música";
-      musicToggle.setAttribute("aria-pressed", "false");
-      setStatus("Música en pausa.");
-    }
-  });
-}
-
-    // Si ya estaba sonando, pausar
-    if (!bgMusic.paused) {
       bgMusic.pause();
       musicToggle.textContent = "🎶 Activar música";
       musicToggle.setAttribute("aria-pressed", "false");
