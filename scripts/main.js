@@ -1,33 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
   console.log("main.js cargó correctamente ✅");
 
-  // Botón comenzar camino
+  // Scroll del botón principal
   const startBtn = document.getElementById("startBtn");
-  const inicioSection = document.getElementById("capitulo-1");
-  
-  if (startBtn && inicioSection) {
-    startBtn.addEventListener("click", () => {
-      inicioSection.scrollIntoView({ behavior: "smooth" });
-    });
-  }
+  startBtn?.addEventListener("click", () => {
+    document.querySelector("#capitulo-1")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
 
-  // Fade-in on scroll
+  // Fade in on scroll
   const faders = document.querySelectorAll(".fade-in");
   const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("visible");
-      });
-    },
-    { threshold: 0.15 }
+    (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
+    { threshold: 0.12 }
   );
   faders.forEach((el) => observer.observe(el));
 
-  // Música ON/OFF (anti-AbortError)
+  // Música ON/OFF
   const musicToggle = document.getElementById("musicToggle");
   const bgMusic = document.getElementById("bgMusic");
   const musicStatus = document.getElementById("musicStatus");
-
   let busy = false;
 
   if (musicToggle && bgMusic) {
@@ -43,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       try {
         if (bgMusic.paused) {
-          // No llames load() aquí: puede interrumpir play()
           await bgMusic.play();
           musicToggle.textContent = "⏸ Pausar música";
           musicToggle.setAttribute("aria-pressed", "true");
@@ -56,11 +46,40 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       } catch (err) {
         console.log("Audio error:", err);
-        setStatus("No se pudo reproducir. Prueba recargar y hacer clic una vez.");
+        setStatus("Tu navegador bloqueó la música. Haz clic otra vez o recarga.");
       } finally {
-        // pequeña ventana para evitar doble disparo
         setTimeout(() => (busy = false), 350);
       }
     });
   }
+
+  // Modal de cartas
+  const modal = document.getElementById("modal");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalBody = document.getElementById("modalBody");
+  const modalClose = document.getElementById("modalClose");
+
+  const openModal = (title, body) => {
+    modalTitle.textContent = title;
+    modalBody.textContent = body;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+  };
+
+  const closeModal = () => {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+  };
+
+  document.querySelectorAll(".cardlet").forEach((c) => {
+    c.addEventListener("click", () => openModal(c.dataset.title || "Carta", c.dataset.body || ""));
+  });
+
+  modalClose?.addEventListener("click", closeModal);
+  modal?.addEventListener("click", (e) => {
+    if (e.target === modal) closeModal();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeModal();
+  });
 });
