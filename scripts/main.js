@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Botón comenzar camino
   const startBtn = document.getElementById("startBtn");
-  const inicioSection = document.getElementById("inicio");
+  const inicioSection = document.getElementById("capítulo-1");
 
   if (startBtn && inicioSection) {
     startBtn.addEventListener("click", () => {
