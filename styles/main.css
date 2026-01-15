@@ -157,3 +157,8 @@ h2 {
   transform: translateY(-2px);
   background: rgba(242, 233, 218, 0.6);
 }
+.music-status {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
