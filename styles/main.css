@@ -391,3 +391,16 @@ a{ color:inherit; }
     padding-right: 54px;
   }
 }
+/* =========================
+   Extras (botoncitos dentro de capítulo)
+========================= */
+.extras{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top: 16px;
+}
+
+.extra-btn{
+  font-weight: 650;
+}
