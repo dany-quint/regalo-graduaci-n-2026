@@ -34,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 50);
 });
-// Música ON/OFF (robusto)
+
+// Música ON/OFF (ultra compatible)
 const musicToggle = document.getElementById("musicToggle");
 const bgMusic = document.getElementById("bgMusic");
 const musicStatus = document.getElementById("musicStatus");
@@ -46,28 +47,34 @@ if (musicToggle && bgMusic) {
     if (musicStatus) musicStatus.textContent = msg;
   };
 
-  musicToggle.addEventListener("click", () => {
-    // Asegura que el audio esté listo
+  const tryPlay = () => {
+    // fuerza carga
     bgMusic.load();
 
-    // Intento de reproducir (sin async/await para evitar bloqueos raros)
-    const playPromise = bgMusic.play();
+    bgMusic
+      .play()
+      .then(() => {
+        musicToggle.textContent = "⏸ Pausar música";
+        musicToggle.setAttribute("aria-pressed", "true");
+        setStatus("Música activada ✨");
+      })
+      .catch((err) => {
+        console.log("Audio play blocked:", err);
+        setStatus("No se pudo reproducir. Abre el MP3 desde el link directo para verificar si se reproduce.");
+      });
+  };
 
-    if (playPromise !== undefined) {
-      playPromise
-        .then(() => {
-          // Si estaba pausado y ahora suena
-          if (!bgMusic.paused) {
-            musicToggle.textContent = "⏸ Pausar música";
-            musicToggle.setAttribute("aria-pressed", "true");
-            setStatus("Música activada ✨");
-          }
-        })
-        .catch(() => {
-          // Si no se pudo reproducir
-          setStatus("Tu navegador bloqueó la música. Haz clic otra vez o recarga la página.");
-        });
+  musicToggle.addEventListener("click", () => {
+    if (bgMusic.paused) {
+      tryPlay();
+    } else {
+      bgMusic.pause();
+      musicToggle.textContent = "🎶 Activar música";
+      musicToggle.setAttribute("aria-pressed", "false");
+      setStatus("Música en pausa.");
     }
+  });
+}
 
     // Si ya estaba sonando, pausar
     if (!bgMusic.paused) {
